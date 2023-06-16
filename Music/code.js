@@ -21,7 +21,7 @@ Learn more at https://github.com/benborgers/opensheet
 var SPREADSHEET_ID_AND_TAB = "1gLyh6gv41vl9H1fBmjFrGfKip9dKkvIu6o8sccTw2lY/Music";
 
 
-
+let song_ratings = 0;
 
 
 $(document).ready(function () {
@@ -43,19 +43,26 @@ $(document).ready(function () {
     /* Your first row's headers designate the KEYs for your data.
     */  
       
-      $(`<tr type="` + row.Recommendation +`">
+      $(`<tr type="` + row.Vibe +`">
           
           <td info="artist">` + row.Artist + `</td></a>
           <td info="title">` + row.Title + `</td>
+          <td info="rating">` + row.Rating + `</td>
           <td info="recommender">` + row.From + `</td>
           <td><a href="` + row.Link +`" target="_blank">Listen</a></td>
         </tr>`)
         .appendTo("#music");
       
+      song_ratings = song_ratings + parseInt(row.Rating);
+      
     })
-
-  
+    
+    
+  // once we're done iterating, average it out
+  $("span[average]").text( (song_ratings / data.length) );
+    
   });
+  
 });  
 
 
